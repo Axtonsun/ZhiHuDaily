@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ZhiHuDaily</string>
+    <string name="date_format">EEE, MMM d, yyyy</string>
+    <string name="action_settings">设置</string>
+    <string name="action_star">收藏</string>
+    <string name="favourite">收藏夹</string>
+</resources>

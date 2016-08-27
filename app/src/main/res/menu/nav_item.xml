@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item android:id="@+id/navigation_item1"
+            android:checkable="true"
+            android:title="首页"
+            android:icon="@mipmap/icon_local"/>
+        <item android:id="@+id/navigation_item2"
+            android:checkable="true"
+            android:title="收藏夹"
+            android:icon="@mipmap/icon_event"/>
+        <item android:id="@+id/navigation_item3"
+            android:checkable="true"
+            android:title="夜间模式"
+            android:icon="@mipmap/icon_photots"/>
+    </group>
+    <item android:id="@+id/navigation_sub"
+        android:title="新增功能">
+        <menu>
+            <item android:id="@+id/navigation_sub_item1"
+                android:checkable="true"
+                android:title="待完善"
+                android:icon="@mipmap/icon_douban"/>
+            <item android:id="@+id/navigation_sub_item2"
+                android:checkable="true"
+                android:title="待完善"
+                android:icon="@mipmap/icon_hot"/>
+            <item android:id="@+id/navigation_sub_item3"
+                android:checkable="true"
+                android:title="关于作者"
+                android:icon="@mipmap/icon_communities"/>
+        </menu>
+    </item>
+
+</menu>
