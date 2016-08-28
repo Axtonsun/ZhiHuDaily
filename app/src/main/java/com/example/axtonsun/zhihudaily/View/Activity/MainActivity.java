@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.axtonsun.zhihudaily.View.Adapter.VpAdapter;
 import com.example.axtonsun.zhihudaily.View.Fragment.HotList;
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                         recreate();
                         break;
                     case R.id.navigation_sub_item3:
-
+                        Toast.makeText(MainActivity.this, "作者:AxtonSun", Toast.LENGTH_SHORT).show();
                         break;
                 }
                 return true;
@@ -95,6 +96,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public String getTime() {
+        /**
+         * d 月中的某一天。一位数的日期没有前导零。
+         * MMM 月份的缩写名称，在 AbbreviatedMonthNames 中定义。
+         * yyyy 包括纪元的四位数的年份。
+         */
         Calendar c = Calendar.getInstance();
         SimpleDateFormat format = new SimpleDateFormat(getString(R.string.date_format));
         return format.format(c.getTime());

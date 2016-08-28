@@ -47,9 +47,10 @@ public class DailyZhDB {
         if (cursor.moveToFirst()) {//移动到第一行
             do {
                 Stories stories = new Stories();
-                stories.setId(cursor.getInt(1));
-                stories.setTitle(cursor.getString(2));
-                favouriteList.add(stories);
+                stories.setId(cursor.getInt(1));//第一列的当前值
+                stories.setTitle(cursor.getString(2));//第二列的当前值
+                stories.setImages(cursor.getString(3));//第三列的当前值
+                favouriteList.add(stories);//将stories数据加入数组 然后进行循环
             } while (cursor.moveToNext());//一直移动到下一行
         }
         cursor.close();//关闭游标
@@ -69,12 +70,6 @@ public class DailyZhDB {
     public void deleteFavourite(Stories stories) {//删除
         if (stories != null) {
             db.delete(DBHelper.TABLE_NAME, DBHelper.COLUMN_NEWS_ID + " = ?", new String[]{stories.getId() + ""});
-        }
-    }
-
-    public synchronized void closeDB() {
-        if (mDailyZhDB != null) {
-            db.close();
         }
     }
 

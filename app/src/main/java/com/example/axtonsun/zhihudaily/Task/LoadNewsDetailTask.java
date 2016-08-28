@@ -15,8 +15,10 @@ import java.io.IOException;
 /**
  * Created by AxtonSun on 2016/8/22.
  */
-public class LoadNewsDetailTask extends AsyncTask<Integer, Void, NewsDetail> {
+public class LoadNewsDetailTask extends AsyncTask<Integer, Void, NewsDetail> {//大写开头是包装类 有好多方法
+
     private WebView mWebView;
+
     public LoadNewsDetailTask(WebView mWebView) {
         this.mWebView = mWebView;
     }
@@ -51,9 +53,18 @@ public class LoadNewsDetailTask extends AsyncTask<Integer, Void, NewsDetail> {
                 .append("<img src=\"").append(headerImage)
                 .append("\" alt=\"\">")
                 .append("<div class=\"img-mask\"></div>");
-        String mNewsContent = "<link rel=\"stylesheet\" type=\"text/css\" href=\"news_content_style.css\"/>"
+        /**
+         * WebView 内容
+         * <link rel="stylesheet" type="text/css" href="news_detail.css" />
+         * WebView的图片和版权 格式
+         * "<link rel=\"stylesheet\" type=\"text/css\" href=\"news_header_style.css\"/>"
+         */
+        String mNewsContent = "<link rel=\"stylesheet\" type=\"text/css\" href=\"news_detail.css\"/>"
                 + "<link rel=\"stylesheet\" type=\"text/css\" href=\"news_header_style.css\"/>"
-                + mNewsDetail.getBody().replace("<div class=\"img-place-holder\">", sb.toString());
+                + mNewsDetail.getBody().replace("<div class=\"img-place-holder\">", sb.toString());//sb.toString(); 把对象转成String类型
+
         mWebView.loadDataWithBaseURL("file:///android_asset/", mNewsContent, "text/html", "UTF-8", null);
+                                    // 与Html相关的路径    | 传入获得的Html代码 | 代码类型通常"text/html" | 代码的编码方式 通常"UTF-8" | 历史URL??
+        //loadDataWithBaseURL() 第一个和第五个为Null时 ===》 loadData()
     }
 }

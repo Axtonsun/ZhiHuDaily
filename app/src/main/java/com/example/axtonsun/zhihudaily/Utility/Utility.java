@@ -37,6 +37,6 @@ public class Utility {
     }
 
     public static void noNetworkAlert(Context context) {
-        Toast.makeText(context, "No Network", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "有连接WIFI吗？有使用4G吗？！", Toast.LENGTH_SHORT).show();
     }
 }

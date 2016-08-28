@@ -48,7 +48,7 @@ public class NewsDetailActivity extends AppCompatActivity{
         mWebView = (WebView) findViewById(R.id.webview);
         setWebView(mWebView);
         stories = (Stories) getIntent().getSerializableExtra("stories");
-        new LoadNewsDetailTask(mWebView).execute(stories.getId());
+        new LoadNewsDetailTask(mWebView).execute(stories.getId());//构造方法中WebView  第一个参数Integer型
         isFavourite = DailyZhDB.getInstance(NewsDetailActivity.this).isFavourite(stories);
 
        /* pager = (ViewPager) findViewById(R.id.viewpager);
@@ -79,9 +79,9 @@ public class NewsDetailActivity extends AppCompatActivity{
     }
 
     private void setWebView(WebView mWebView) {
-        mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.setVerticalScrollBarEnabled(false);
-        mWebView.setHorizontalScrollBarEnabled(false);
+        mWebView.getSettings().setJavaScriptEnabled(true);//开启Javascript支持
+        mWebView.setVerticalScrollBarEnabled(true);//设置竖直滚动条
+        //mWebView.setHorizontalScrollBarEnabled(false);
     }
 
     public static void startActivity(Context context, Stories news) {
