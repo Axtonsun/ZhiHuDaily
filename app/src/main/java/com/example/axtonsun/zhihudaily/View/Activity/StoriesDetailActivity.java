@@ -3,7 +3,6 @@ package com.example.axtonsun.zhihudaily.View.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import android.support.v7.widget.Toolbar;
@@ -22,13 +21,11 @@ import com.example.axtonsun.zhihudaily.Utility.Utility;
 /**
  * Created by AxtonSun on 2016/8/21.
  */
-public class NewsDetailActivity extends AppCompatActivity{
+public class StoriesDetailActivity extends AppCompatActivity{
 
     private WebView mWebView;
     private boolean isFavourite = false;
     private Stories stories;
-    private HotStories hotStories;
-    private ViewPager pager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +46,7 @@ public class NewsDetailActivity extends AppCompatActivity{
         setWebView(mWebView);
         stories = (Stories) getIntent().getSerializableExtra("stories");
         new LoadNewsDetailTask(mWebView).execute(stories.getId());//构造方法中WebView  第一个参数Integer型
-        isFavourite = DailyZhDB.getInstance(NewsDetailActivity.this).isFavourite(stories);
+        isFavourite = DailyZhDB.getInstance(StoriesDetailActivity.this).isFavourite(stories);
 
        /* pager = (ViewPager) findViewById(R.id.viewpager);
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -63,7 +60,7 @@ public class NewsDetailActivity extends AppCompatActivity{
                 if (position == 0) {
                     stories = (Stories) getIntent().getSerializableExtra("stories");
                     new LoadNewsDetailTask(mWebView).execute(stories.getId());
-                    isFavourite = DailyZhDB.getInstance(NewsDetailActivity.this).isFavourite(stories);
+                    isFavourite = DailyZhDB.getInstance(StoriesDetailActivity.this).isFavourite(stories);
 
                 }else if (position == 1){
                     hotStories= (HotStories) getIntent().getSerializableExtra("hotstories");
@@ -84,24 +81,25 @@ public class NewsDetailActivity extends AppCompatActivity{
         //mWebView.setHorizontalScrollBarEnabled(false);
     }
 
-    public static void startActivity(Context context, Stories news) {
+    public static void startActivity(Context context, Stories stories) {
         if (Utility.checkNetworkConnection(context)) {
-            Intent i = new Intent(context, NewsDetailActivity.class);
-            i.putExtra("stories", news);
+            Intent i = new Intent(context, StoriesDetailActivity.class);
+            i.putExtra("stories", stories);
             context.startActivity(i);
         } else {
             Utility.noNetworkAlert(context);
         }
     }
-    public static void startHotActivity(Context context, HotStories news) {
+    public static void startHotActivity(Context context, HotStories hotStories) {
         if (Utility.checkNetworkConnection(context)) {
-            Intent i = new Intent(context, NewsDetailActivity.class);
-            i.putExtra("hotstories", news);
+            Intent i = new Intent(context, StoriesDetailActivity.class);
+            i.putExtra("hotStories", hotStories);
             context.startActivity(i);
         } else {
             Utility.noNetworkAlert(context);
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);

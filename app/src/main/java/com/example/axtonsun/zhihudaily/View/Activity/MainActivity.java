@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences preferences;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private ViewPager viewPager;
+    public ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,StartActivity.class);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
     }
     private void initNaviView() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);

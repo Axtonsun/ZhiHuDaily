@@ -1,6 +1,7 @@
 package com.example.axtonsun.zhihudaily.View.Fragment;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,13 +24,20 @@ public class RvList extends BaseFragment {
 
     private boolean isConnected;
     private RecyclerView mRecyclerView;
+    private FloatingActionButton floatingActionButton;
     //private List<Stories> storiesList;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.viewpager_rv, container, false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv);
-        //mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        floatingActionButton = (FloatingActionButton) view.findViewById(R.id.fab);//FloatingActionButton的Id
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {//FAB的点击事件
+            @Override
+            public void onClick(View v) {
+                mRecyclerView.smoothScrollToPosition(0);
+            }
+        });
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity,LinearLayoutManager.VERTICAL,false));
         return view;
     }

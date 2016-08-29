@@ -1,7 +1,6 @@
 package com.example.axtonsun.zhihudaily.View.Adapter;
 
 import android.content.Context;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,11 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.axtonsun.zhihudaily.Bean.HotStories;
 import com.example.axtonsun.zhihudaily.Bean.Stories;
 import com.example.axtonsun.zhihudaily.R;
 import com.example.axtonsun.zhihudaily.Utility.Utility;
-import com.example.axtonsun.zhihudaily.View.Activity.NewsDetailActivity;
+import com.example.axtonsun.zhihudaily.View.Activity.StoriesDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +45,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.MyViewHolder> {
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NewsDetailActivity.startActivity(context, stories.get(position));
+                StoriesDetailActivity.startActivity(context, stories.get(position));
             }
         });
 

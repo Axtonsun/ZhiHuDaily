@@ -9,10 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.axtonsun.zhihudaily.Bean.HotStories;
-import com.example.axtonsun.zhihudaily.Bean.Stories;
 import com.example.axtonsun.zhihudaily.R;
 import com.example.axtonsun.zhihudaily.Utility.Utility;
-import com.example.axtonsun.zhihudaily.View.Activity.NewsDetailActivity;
+import com.example.axtonsun.zhihudaily.View.Activity.StoriesDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +43,7 @@ public class RvHotAdapter extends RecyclerView.Adapter<RvHotAdapter.MyViewHolder
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NewsDetailActivity.startHotActivity(context, hotStories.get(position));
+                StoriesDetailActivity.startHotActivity(context, hotStories.get(position));
             }
         });
 
