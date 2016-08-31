@@ -2,6 +2,7 @@ package com.example.axtonsun.zhihudaily.View.Activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -10,15 +11,28 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.CheckBox;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.axtonsun.zhihudaily.Bean.DayNight;
+import com.example.axtonsun.zhihudaily.Helper.DayNightHelper;
 import com.example.axtonsun.zhihudaily.View.Adapter.VpAdapter;
 import com.example.axtonsun.zhihudaily.View.Fragment.HotList;
 import com.example.axtonsun.zhihudaily.View.Fragment.RvList;
 import com.example.axtonsun.zhihudaily.R;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -26,21 +40,24 @@ public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private boolean isNight;
-    private SharedPreferences preferences;
+    //private SharedPreferences preferences;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     public ViewPager viewPager;
+    private DayNightHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        helper = new DayNightHelper(this);
+        if (helper.isDay()) {
+            setTheme(R.style.DayTheme);
+        } else {
+            setTheme(R.style.NightTheme);
+        }
         setContentView(R.layout.activity_main);
-        preferences = getSharedPreferences("axton",this.MODE_PRIVATE);
         initNaviView();
-        Intent intent = new Intent(this,StartActivity.class);
-        startActivity(intent);
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-
     }
     private void initNaviView() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -78,13 +95,12 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case R.id.navigation_item3:
-                        isNight = preferences.getBoolean("night", false);
-                        if (isNight) {
-                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                            preferences.edit().putBoolean("night", false).apply();
-                        } else {
-                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                            preferences.edit().putBoolean("night", true).apply();
+                        if (helper.isDay()){
+                            helper.setMode(DayNight.NIGHT);
+                            setTheme(R.style.NightTheme);
+                        }else {
+                            helper.setMode(DayNight.DAY);
+                            setTheme(R.style.DayTheme);
                         }
                         recreate();
                         break;
@@ -106,5 +122,4 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat format = new SimpleDateFormat(getString(R.string.date_format));
         return format.format(c.getTime());
     }
-
 }

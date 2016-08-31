@@ -23,7 +23,7 @@ import java.util.List;
 public class RvList extends BaseFragment {
 
     private boolean isConnected;
-    private RecyclerView mRecyclerView;
+    public RecyclerView mRecyclerView;
     private FloatingActionButton floatingActionButton;
     //private List<Stories> storiesList;
 

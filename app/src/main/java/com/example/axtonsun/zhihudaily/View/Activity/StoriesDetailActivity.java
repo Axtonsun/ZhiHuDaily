@@ -9,11 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.webkit.WebView;
 
 import com.example.axtonsun.zhihudaily.Bean.HotStories;
 import com.example.axtonsun.zhihudaily.Bean.Stories;
 import com.example.axtonsun.zhihudaily.DB.DailyZhDB;
+import com.example.axtonsun.zhihudaily.Helper.DayNightHelper;
 import com.example.axtonsun.zhihudaily.R;
 import com.example.axtonsun.zhihudaily.Task.LoadNewsDetailTask;
 import com.example.axtonsun.zhihudaily.Utility.Utility;
@@ -26,9 +28,17 @@ public class StoriesDetailActivity extends AppCompatActivity{
     private WebView mWebView;
     private boolean isFavourite = false;
     private Stories stories;
+    private DayNightHelper helper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        helper = new DayNightHelper(this);
+        if (helper.isDay()){
+            setTheme(R.style.DayTheme);
+        }else {
+            setTheme(R.style.NightTheme);
+        }
         setContentView(R.layout.item_news);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.tb1);

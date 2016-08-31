@@ -1,7 +1,9 @@
 package com.example.axtonsun.zhihudaily.View.Activity;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
@@ -19,16 +21,25 @@ import java.util.Random;
  */
 public class StartActivity extends AppCompatActivity {
     private ImageView start;
-    //private int[] images = {R.drawable.start0, R.drawable.start1, R.drawable.start2, R.drawable.start3, R.drawable.start4, R.drawable.start5};
     private int[] images = {R.drawable.start4,R.drawable.start5};
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         //隐藏状态栏 高宽都是全屏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.start_main);
         initImage();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(StartActivity.this,MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        },1500);
+
     }
 
     private void initImage() {
@@ -59,9 +70,6 @@ public class StartActivity extends AppCompatActivity {
         start.startAnimation(scaleAnimation);
     }
 
-    @Override
-    public void onBackPressed() {
-    }
 
 /*    public static int calculateInSampleSize(BitmapFactory.Options options,
                                             int reqWidth, int reqHeight) {
