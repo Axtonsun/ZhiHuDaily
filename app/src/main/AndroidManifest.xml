@@ -34,5 +34,11 @@
             android:screenOrientation="portrait">
 
         </activity>
+        <activity android:name=".View.Activity.StoryActivity">
+
+        </activity>
+        <activity android:name=".View.Activity.StoryHotActivity">
+
+        </activity>
     </application>
 </manifest>

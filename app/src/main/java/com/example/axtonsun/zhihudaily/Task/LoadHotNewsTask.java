@@ -19,16 +19,11 @@ import java.util.List;
  */
 public class LoadHotNewsTask extends AsyncTask<Void, Void, List<HotStories>> {
     private RvHotAdapter adapter;
-    private onFinishListener listener;
+
 
     public LoadHotNewsTask(RvHotAdapter adapter) {
         super();
         this.adapter = adapter;
-    }
-    public LoadHotNewsTask(RvHotAdapter adapter, onFinishListener listener) {
-        super();
-        this.adapter = adapter;
-        this.listener = listener;
     }
     @Override
     protected List<HotStories> doInBackground(Void... params) {
@@ -44,11 +39,6 @@ public class LoadHotNewsTask extends AsyncTask<Void, Void, List<HotStories>> {
     @Override
     protected void onPostExecute(List<HotStories> storiesList) {
         adapter.refreshHotNewsList(storiesList);
-        if (listener != null) {
-            listener.afterTaskFinish();
-        }
     }
-    public interface onFinishListener {
-        public void afterTaskFinish();
-    }
+
 }

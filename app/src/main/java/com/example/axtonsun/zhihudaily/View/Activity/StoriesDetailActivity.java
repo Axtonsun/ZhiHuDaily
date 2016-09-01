@@ -25,9 +25,10 @@ import com.example.axtonsun.zhihudaily.Utility.Utility;
  */
 public class StoriesDetailActivity extends AppCompatActivity{
 
-    private WebView mWebView;
-    private boolean isFavourite = false;
-    private Stories stories;
+    protected WebView mWebView;
+    protected boolean isFavourite = false;
+    protected Stories stories;
+    protected HotStories hotStories;
     private DayNightHelper helper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +55,10 @@ public class StoriesDetailActivity extends AppCompatActivity{
         });
         mWebView = (WebView) findViewById(R.id.webview);
         setWebView(mWebView);
-        stories = (Stories) getIntent().getSerializableExtra("stories");
+        init();
+        /*stories = (Stories) getIntent().getSerializableExtra("stories");
         new LoadNewsDetailTask(mWebView).execute(stories.getId());//构造方法中WebView  第一个参数Integer型
-        isFavourite = DailyZhDB.getInstance(StoriesDetailActivity.this).isFavourite(stories);
+        isFavourite = DailyZhDB.getInstance(StoriesDetailActivity.this).isFavourite(stories);*/
 
        /* pager = (ViewPager) findViewById(R.id.viewpager);
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -85,6 +87,10 @@ public class StoriesDetailActivity extends AppCompatActivity{
         });*/
     }
 
+    protected void init(){
+
+    }
+
     private void setWebView(WebView mWebView) {
         mWebView.getSettings().setJavaScriptEnabled(true);//开启Javascript支持
         mWebView.setVerticalScrollBarEnabled(true);//设置竖直滚动条
@@ -93,7 +99,7 @@ public class StoriesDetailActivity extends AppCompatActivity{
 
     public static void startActivity(Context context, Stories stories) {
         if (Utility.checkNetworkConnection(context)) {
-            Intent i = new Intent(context, StoriesDetailActivity.class);
+            Intent i = new Intent(context, StoryActivity.class);
             i.putExtra("stories", stories);
             context.startActivity(i);
         } else {
@@ -102,7 +108,7 @@ public class StoriesDetailActivity extends AppCompatActivity{
     }
     public static void startHotActivity(Context context, HotStories hotStories) {
         if (Utility.checkNetworkConnection(context)) {
-            Intent i = new Intent(context, StoriesDetailActivity.class);
+            Intent i = new Intent(context, StoryHotActivity.class);
             i.putExtra("hotStories", hotStories);
             context.startActivity(i);
         } else {
@@ -121,6 +127,7 @@ public class StoriesDetailActivity extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_settings:
+
                 break;
             case R.id.action_favourite:
                 if (!isFavourite) {

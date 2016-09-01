@@ -24,7 +24,8 @@ public class LoadNewsDetailTask extends AsyncTask<Integer, Void, NewsDetail> {//
     }
 
     @Override
-    protected NewsDetail doInBackground(Integer... params) {
+    protected NewsDetail doInBackground(Integer... params) {//表示任意多个相同类型的参数
+                                                            //例如Boolean... booleans,就是表示任意多个bool量，调用的时候就用 booleans[0],booleans[1]...
         NewsDetail mNewsDetail = null;
         try {
             mNewsDetail = JsonHelper.parseJsonToDetail(HttpUtil.getNewsDetail(params[0]));
@@ -44,7 +45,10 @@ public class LoadNewsDetailTask extends AsyncTask<Integer, Void, NewsDetail> {//
         } else {
             headerImage = mNewsDetail.getImage();
         }
+        //主要操作是 append 和 insert 方法，可重载这些方法，以接受任意类型的数据
         StringBuilder sb = new StringBuilder();
+        //append 方法始终将这些字符添加到缓冲区的末端
+        //insert 方法则在指定的点添加字符。
         sb.append("<div class=\"img-wrap\">")
                 .append("<h1 class=\"headline-title\">")
                 .append(mNewsDetail.getTitle()).append("</h1>")

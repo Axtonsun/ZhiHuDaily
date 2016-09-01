@@ -26,9 +26,7 @@ public class RvHotAdapter extends RecyclerView.Adapter<RvHotAdapter.MyViewHolder
         this.context = context;
         hotStories = new ArrayList<>();
     }
-    public RvHotAdapter(Context context,List<HotStories> stories){
-        this.context = context;
-    }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         MyViewHolder myViewHolder = new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rv,parent,false));
