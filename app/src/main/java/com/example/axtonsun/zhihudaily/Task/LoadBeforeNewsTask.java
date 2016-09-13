@@ -1,6 +1,7 @@
 package com.example.axtonsun.zhihudaily.Task;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.axtonsun.zhihudaily.Bean.Stories;
 import com.example.axtonsun.zhihudaily.Net.HttpUtil;
@@ -30,15 +31,16 @@ public class LoadBeforeNewsTask extends AsyncTask<Void, Void, List<Stories>> {
         try {
             storiesList = JsonHelper.parseJsonToList(HttpUtil.getBeforeNewsList(Utility.getTime()));
         } catch (IOException | JSONException e) {
-
+            Log.i("loadBeforeNewsTask", String.valueOf(storiesList) + "before storieslist");
+            e.printStackTrace();
         } finally {
             return storiesList;
         }
     }
     @Override
     protected void onPostExecute(List<Stories> storiesList) {
+        adapter.setMoreStatus(RvAdapter.PULLUP_LOAD_MORE);
         adapter.refreshNewsList(storiesList);
-
     }
 
 }

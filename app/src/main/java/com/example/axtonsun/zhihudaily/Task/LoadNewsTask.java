@@ -1,6 +1,7 @@
 package com.example.axtonsun.zhihudaily.Task;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.axtonsun.zhihudaily.Bean.Stories;
 import com.example.axtonsun.zhihudaily.Net.HttpUtil;
@@ -28,15 +29,16 @@ public class LoadNewsTask extends AsyncTask<Void, Void, List<Stories>> {
         try {
             storiesList = JsonHelper.parseJsonToList(HttpUtil.getLastNewsList());
         } catch (IOException | JSONException e) {
-
+            Log.v("ssssss", "error");
+            e.printStackTrace();
         } finally {
             return storiesList;
         }
     }
     @Override
     protected void onPostExecute(List<Stories> storiesList) {
-        adapter.refreshNewsList(storiesList);
 
+        adapter.refreshNewsList(storiesList);
     }
 
 }

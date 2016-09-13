@@ -59,10 +59,6 @@ public class RvList extends BaseFragment {
         swipeRefreshWidget.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                       Looper.prepare();
                         if (isConnected) {
                             new LoadNewsTask(adapter).execute();
                             adapter.notifyDataSetChanged();
@@ -72,18 +68,14 @@ public class RvList extends BaseFragment {
                             Utility.noNetworkAlert(mActivity);
                             swipeRefreshWidget.setRefreshing(false);//设置SwipeRefreshLayout当前是否处于刷新状态，一般是在请求数据的时候设置为true，在数据被加载到View中后，设置为false。
                         }
-                        Looper.loop();
-                    }
-                }).start();
             }
         });
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             private int lastVisibleItem;
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
 
-                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 ==
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 2 ==
                         adapter.getItemCount()) {
                     Log.e("TAG",lastVisibleItem + "lastVisibleItem " + adapter.getItemCount() + " count");
                     adapter.setMoreStatus(RvAdapter.LOADING_MORE);
@@ -103,19 +95,13 @@ public class RvList extends BaseFragment {
                             adapter.notifyDataSetChanged();
                         }
                     }).start();*/
-                   /* mActivity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            new LoadBeforeNewsTask(adapter);
-                            adapter.setMoreStatus(RvAdapter.PULLUP_LOAD_MORE);
-                        }
-                    });*/
+                    new LoadBeforeNewsTask(adapter).execute();
+
                 }
             }
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
                 lastVisibleItem = layoutManager.findLastVisibleItemPosition();//返回当前最后一个可见Item的position
             }
         });

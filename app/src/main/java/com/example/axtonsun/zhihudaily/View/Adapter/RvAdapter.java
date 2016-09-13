@@ -3,6 +3,7 @@ package com.example.axtonsun.zhihudaily.View.Adapter;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -129,8 +130,10 @@ public class RvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
     public void refreshNewsList(List<Stories> storiesList) {
+        Log.v("ssssss", String.valueOf(storiesList) + " " + String.valueOf(stories));
         stories.clear();
         stories.addAll(storiesList);
+
     }
     public void setMoreStatus(int status){
         load_more_status=status;
