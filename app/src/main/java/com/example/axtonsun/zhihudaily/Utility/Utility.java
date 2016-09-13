@@ -10,6 +10,11 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Created by AxtonSun on 2016/8/19.
  */
@@ -38,5 +43,17 @@ public class Utility {
 
     public static void noNetworkAlert(Context context) {
         Toast.makeText(context, "有连接WIFI吗？有使用4G吗？！", Toast.LENGTH_SHORT).show();
+    }
+    public static String getTime() {
+        /**
+         * d 月中的某一天。一位数的日期没有前导零。
+         * MMM 月份的缩写名称，在 AbbreviatedMonthNames 中定义。
+         * yyyy 包括纪元的四位数的年份。
+         */
+        //Calendar c = Calendar.getInstance();//获取一个Calendar对象并可以进行时间的计算
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        //DateFormat df = DateFormat.getDateInstance();
+        //return df.format(c.getTime());
+        return format.format(new Date());
     }
 }

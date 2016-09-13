@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.example.axtonsun.zhihudaily.Bean.DayNight;
 import com.example.axtonsun.zhihudaily.Helper.DayNightHelper;
+import com.example.axtonsun.zhihudaily.Utility.Utility;
 import com.example.axtonsun.zhihudaily.View.Adapter.VpAdapter;
 import com.example.axtonsun.zhihudaily.View.Fragment.HotList;
 import com.example.axtonsun.zhihudaily.View.Fragment.RvList;
@@ -63,11 +64,11 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabs);
-        mTabLayout.addTab(mTabLayout.newTab().setText(getTime()));//给TabLayout添加Tab
+        mTabLayout.addTab(mTabLayout.newTab().setText(Utility.getTime()));//给TabLayout添加Tab
         mTabLayout.addTab(mTabLayout.newTab().setText("热门文章"));
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         VpAdapter viewPagerAdapter = new VpAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(new RvList(), getTime());//添加Fragment
+        viewPagerAdapter.addFragment(new RvList(),Utility.getTime());//添加Fragment
         viewPagerAdapter.addFragment(new HotList(),"热门文章");
         viewPager.setAdapter(viewPagerAdapter);//设置适配器
         mTabLayout.setupWithViewPager(viewPager);//给TabLayout设置关联ViewPager，如果设置了ViewPager，那么ViewPagerAdapter中的getPageTitle()方法返回的就是Tab上的标题
@@ -112,14 +113,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public String getTime() {
-        /**
-         * d 月中的某一天。一位数的日期没有前导零。
-         * MMM 月份的缩写名称，在 AbbreviatedMonthNames 中定义。
-         * yyyy 包括纪元的四位数的年份。
-         */
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat format = new SimpleDateFormat(getString(R.string.date_format));
-        return format.format(c.getTime());
-    }
+
 }

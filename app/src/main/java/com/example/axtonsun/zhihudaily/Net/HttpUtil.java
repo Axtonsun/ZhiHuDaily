@@ -12,6 +12,7 @@ import java.net.URL;
 public class HttpUtil {
 
    public static String NEWSLIST_LATEST = "http://news-at.zhihu.com/api/4/news/latest";
+   public static String NEWSLIST_BEFORE = "http://news.at.zhihu.com/api/4/news/before/";
    public static String NEWSDETAIL = "http://news-at.zhihu.com/api/4/news/";
 
    public static String get(String urlAddr) throws IOException {
@@ -50,6 +51,10 @@ public class HttpUtil {
    }
    public static String getLastNewsList() throws IOException {
       return get(NEWSLIST_LATEST);
+   }
+
+   public static String getBeforeNewsList(String date)throws IOException{
+      return get(NEWSLIST_BEFORE + date + "-1");
    }
    public static String getNewsDetail(int id) throws IOException {return get(NEWSDETAIL + id);}
 }

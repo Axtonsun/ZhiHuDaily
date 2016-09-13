@@ -6,13 +6,20 @@
     android:paddingBottom="15dp"
     android:layout_width="match_parent"
     android:layout_height="180dp">
-    <ImageView
+    <com.example.axtonsun.zhihudaily.Utility.CircleImageView
         android:id="@+id/photo"
         android:src="@drawable/headimage"
         android:layout_above="@+id/desc"
         android:layout_marginBottom="20dp"
         android:layout_width="80dp"
         android:layout_height="80dp" />
+   <!-- <ImageView
+        android:id="@+id/photo"
+        android:src="@drawable/headimage"
+        android:layout_above="@+id/desc"
+        android:layout_marginBottom="20dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp" />-->
     <TextView
         android:id="@+id/desc"
         android:layout_alignParentBottom="true"

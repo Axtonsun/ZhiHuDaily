@@ -2,6 +2,7 @@ package com.example.axtonsun.zhihudaily.View.Adapter;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +67,7 @@ public class RvHotAdapter extends RecyclerView.Adapter<RvHotAdapter.MyViewHolder
 
     public void refreshHotNewsList(List<HotStories> stories){
         hotStories.clear();
+        Log.v("stroies", String.valueOf(stories.size()));
         hotStories.addAll(stories);
     }
 }

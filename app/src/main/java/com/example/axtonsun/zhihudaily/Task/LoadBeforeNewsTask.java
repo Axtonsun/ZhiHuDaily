@@ -5,19 +5,21 @@ import android.os.AsyncTask;
 import com.example.axtonsun.zhihudaily.Bean.Stories;
 import com.example.axtonsun.zhihudaily.Net.HttpUtil;
 import com.example.axtonsun.zhihudaily.Net.JsonHelper;
+import com.example.axtonsun.zhihudaily.Utility.Utility;
 import com.example.axtonsun.zhihudaily.View.Adapter.RvAdapter;
 
 import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.List;
+
 /**
- * Created by AxtonSun on 2016/8/22.
+ * Created by AxtonSun on 2016/9/13.
  */
-public class LoadNewsTask extends AsyncTask<Void, Void, List<Stories>> {
+public class LoadBeforeNewsTask extends AsyncTask<Void, Void, List<Stories>> {
     private RvAdapter adapter;
 
-    public LoadNewsTask(RvAdapter adapter) {
+    public LoadBeforeNewsTask(RvAdapter adapter) {
         super();
         this.adapter = adapter;
     }
@@ -26,7 +28,7 @@ public class LoadNewsTask extends AsyncTask<Void, Void, List<Stories>> {
     protected List<Stories> doInBackground(Void... params) {
         List<Stories> storiesList = null;
         try {
-            storiesList = JsonHelper.parseJsonToList(HttpUtil.getLastNewsList());
+            storiesList = JsonHelper.parseJsonToList(HttpUtil.getBeforeNewsList(Utility.getTime()));
         } catch (IOException | JSONException e) {
 
         } finally {

@@ -1,6 +1,7 @@
 package com.example.axtonsun.zhihudaily.View.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,6 +23,8 @@ import java.util.Random;
 public class StartActivity extends AppCompatActivity {
     private ImageView start;
     private int[] images = {R.drawable.start4,R.drawable.start5};
+    private boolean isFirst;
+    private Handler handler = new Handler();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,18 +33,34 @@ public class StartActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.start_main);
-        initImage();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(StartActivity.this,MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        },1500);
 
+        SharedPreferences preferences = getSharedPreferences("first",MODE_PRIVATE);
+        isFirst = preferences.getBoolean("isFirst",true);
+        if (isFirst) {
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    initImage();
+                    gotoMainActivity();
+                }
+            },1500);
+           preferences.edit().putBoolean("isFirst",false).apply();
+        }else {
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    gotoMainActivity();
+                }
+            },1500);
+
+        }
     }
 
+    private void gotoMainActivity(){
+        Intent intent = new Intent(StartActivity.this,MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
     private void initImage() {
         start = (ImageView) findViewById(R.id.startImage);
         Random random = new Random();

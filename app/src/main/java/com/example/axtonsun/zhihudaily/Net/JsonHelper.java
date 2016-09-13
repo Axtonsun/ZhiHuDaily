@@ -1,6 +1,7 @@
 package com.example.axtonsun.zhihudaily.Net;
 
 import com.example.axtonsun.zhihudaily.Bean.HotStories;
+import com.example.axtonsun.zhihudaily.Bean.Root;
 import com.example.axtonsun.zhihudaily.Bean.Stories;
 import com.example.axtonsun.zhihudaily.Bean.NewsDetail;
 import com.google.gson.Gson;
@@ -34,6 +35,7 @@ public class JsonHelper {
         }
         return storiesList;
     }
+
 
     public static List<HotStories> parseJsonToHotList(String string)throws JSONException{
         JSONObject hotNews = new JSONObject(string);
