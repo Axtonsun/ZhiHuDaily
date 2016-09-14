@@ -54,7 +54,7 @@ public class HttpUtil {
    }
 
    public static String getBeforeNewsList(String date)throws IOException{
-      return get(NEWSLIST_BEFORE + date + "-1");
+      return get(NEWSLIST_BEFORE + date);
    }
    public static String getNewsDetail(int id) throws IOException {return get(NEWSDETAIL + id);}
 }

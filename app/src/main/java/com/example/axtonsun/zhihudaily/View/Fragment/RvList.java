@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.axtonsun.zhihudaily.Task.LoadBeforeNewsTask;
 import com.example.axtonsun.zhihudaily.Task.LoadNewsTask;
@@ -37,9 +38,12 @@ public class RvList extends BaseFragment {
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.viewpager_rv, container, false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv);
-        textView = (TextView) view.findViewById(R.id.time_tv);
+
         swipeRefreshWidget = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_widget);
-        swipeRefreshWidget.setColorSchemeResources(R.color.colorPrimaryDark, R.color.colorAccent,R.color.colorPrimary);//setColorSchemeResources():设置进度条的颜色主题，最多设置四种
+        swipeRefreshWidget.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);//setColorSchemeResources():设置进度条的颜色主题，最多设置四种
         floatingActionButton = (FloatingActionButton) view.findViewById(R.id.fab);//FloatingActionButton的Id
         floatingActionButton.setOnClickListener(new View.OnClickListener() {//FAB的点击事件
             @Override
@@ -59,44 +63,34 @@ public class RvList extends BaseFragment {
         swipeRefreshWidget.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                        if (isConnected) {
-                            new LoadNewsTask(adapter).execute();
-                            adapter.notifyDataSetChanged();
-                            //Toast.makeText(mActivity, "刷新完成", Toast.LENGTH_SHORT).show();
-                            swipeRefreshWidget.setRefreshing(false);
-                        } else {
-                            Utility.noNetworkAlert(mActivity);
+                if (isConnected) {
+                    new LoadNewsTask(adapter, new LoadNewsTask.onFinishListener() {
+                        @Override
+                        public void afterTaskFinish() {
                             swipeRefreshWidget.setRefreshing(false);//设置SwipeRefreshLayout当前是否处于刷新状态，一般是在请求数据的时候设置为true，在数据被加载到View中后，设置为false。
+                            //Toast.makeText(mActivity, "Refresh success", Toast.LENGTH_SHORT).show();
                         }
+                    }).execute();
+                } else {
+                    Utility.noNetworkAlert(mActivity);
+                    swipeRefreshWidget.setRefreshing(false);
+                }
             }
         });
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             private int lastVisibleItem;
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-
-                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 2 ==
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 ==
                         adapter.getItemCount()) {
                     Log.e("TAG",lastVisibleItem + "lastVisibleItem " + adapter.getItemCount() + " count");
                     adapter.setMoreStatus(RvAdapter.LOADING_MORE);
-    /*                new Handler().postDelayed(new Runnable() {
+                    new LoadBeforeNewsTask(adapter, new LoadBeforeNewsTask.onFinishListener() {
                         @Override
-                        public void run() {
-                            new LoadBeforeNewsTask(adapter);
+                        public void afterTaskFinish() {
                             adapter.setMoreStatus(RvAdapter.PULLUP_LOAD_MORE);
-                            //adapter.notifyDataSetChanged();
                         }
-                    }, 1500);*/
-       /*             new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            new LoadBeforeNewsTask(adapter);
-                            adapter.setMoreStatus(RvAdapter.PULLUP_LOAD_MORE);
-                            adapter.notifyDataSetChanged();
-                        }
-                    }).start();*/
-                    new LoadBeforeNewsTask(adapter).execute();
-
+                    }).execute();
                 }
             }
 
@@ -105,8 +99,8 @@ public class RvList extends BaseFragment {
                 lastVisibleItem = layoutManager.findLastVisibleItemPosition();//返回当前最后一个可见Item的position
             }
         });
-/*        if (isConnected) new LoadNewsTask(adapter).execute();
-        else Utility.noNetworkAlert(mActivity);*/
+        if (isConnected) new LoadNewsTask(adapter).execute();
+        else Utility.noNetworkAlert(mActivity);
         mRecyclerView.setAdapter(adapter);
     }
 }

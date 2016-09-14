@@ -16,11 +16,17 @@ import java.util.List;
  * Created by AxtonSun on 2016/8/22.
  */
 public class LoadNewsTask extends AsyncTask<Void, Void, List<Stories>> {
-    private RvAdapter adapter;
 
+    private RvAdapter adapter;
+    private onFinishListener listener;
     public LoadNewsTask(RvAdapter adapter) {
         super();
         this.adapter = adapter;
+    }
+    public LoadNewsTask(RvAdapter adapter, onFinishListener listener) {
+        super();
+        this.adapter = adapter;
+        this.listener = listener;
     }
 
     @Override
@@ -37,8 +43,13 @@ public class LoadNewsTask extends AsyncTask<Void, Void, List<Stories>> {
     }
     @Override
     protected void onPostExecute(List<Stories> storiesList) {
-
         adapter.refreshNewsList(storiesList);
+        if (listener != null) {
+            listener.afterTaskFinish();
+        }
+    }
+    public interface onFinishListener {
+        public void afterTaskFinish();
     }
 
 }

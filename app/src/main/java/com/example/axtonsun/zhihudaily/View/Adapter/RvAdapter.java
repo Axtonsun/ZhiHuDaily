@@ -48,8 +48,6 @@ public class RvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    /*        MyViewHolder myViewHolder = new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rv, parent, false));
-            return myViewHolder;*/
             if (viewType == TYPE_NORMAL_ITEM) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout
                         .item_rv, parent, false);
@@ -80,13 +78,12 @@ public class RvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             FooterViewHolder footerViewHolder = (FooterViewHolder)holder;
             switch (load_more_status) {
                 case PULLUP_LOAD_MORE:
-                    footerViewHolder.foot_view_item_tv.setText("上拉加载更多");
-                    footerViewHolder.foot_view_item_tv.setVisibility(View.VISIBLE);
+                    //footerViewHolder.foot_view_item_tv.setText("上拉加载更多");
+                    //footerViewHolder.foot_view_item_tv.setVisibility(View.VISIBLE);
                     footerViewHolder.progressBar.setVisibility(View.GONE);
                     break;
                 case LOADING_MORE:
                     footerViewHolder.foot_view_item_tv.setText("正在加载更多数据...");
-                    //footViewHolder.foot_view_item_tv.setVisibility(View.GONE);
                     footerViewHolder.progressBar.setVisibility(View.VISIBLE);
                     break;
             }
@@ -95,7 +92,6 @@ public class RvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public int getItemCount() {
         return stories.size() + 1;
-        //return stories==null?0:stories.size();
     }
 
     @Override
@@ -134,6 +130,9 @@ public class RvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         stories.clear();
         stories.addAll(storiesList);
 
+    }
+    public void LoadMoreNewslist(List<Stories> storiesList){
+        stories.addAll(storiesList);
     }
     public void setMoreStatus(int status){
         load_more_status=status;

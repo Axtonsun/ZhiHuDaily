@@ -18,11 +18,18 @@ import java.util.List;
  * Created by AxtonSun on 2016/9/13.
  */
 public class LoadBeforeNewsTask extends AsyncTask<Void, Void, List<Stories>> {
-    private RvAdapter adapter;
 
+    private RvAdapter adapter;
+    private onFinishListener listener;
+/*
     public LoadBeforeNewsTask(RvAdapter adapter) {
         super();
         this.adapter = adapter;
+    }*/
+    public LoadBeforeNewsTask(RvAdapter adapter, onFinishListener listener) {
+        super();
+        this.adapter = adapter;
+        this.listener = listener;
     }
 
     @Override
@@ -37,10 +44,15 @@ public class LoadBeforeNewsTask extends AsyncTask<Void, Void, List<Stories>> {
             return storiesList;
         }
     }
+
     @Override
     protected void onPostExecute(List<Stories> storiesList) {
-        adapter.setMoreStatus(RvAdapter.PULLUP_LOAD_MORE);
-        adapter.refreshNewsList(storiesList);
+        adapter.LoadMoreNewslist(storiesList);
+        if (listener != null) {
+            listener.afterTaskFinish();
+        }
     }
-
+    public interface onFinishListener {
+        public void afterTaskFinish();
+    }
 }
