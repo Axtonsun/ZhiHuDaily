@@ -9,7 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.axtonsun.zhihudaily.Bean.HotStories;
+import com.bumptech.glide.Glide;
+import com.example.axtonsun.zhihudaily.Bean.Hot;
 import com.example.axtonsun.zhihudaily.R;
 import com.example.axtonsun.zhihudaily.Utility.Utility;
 import com.example.axtonsun.zhihudaily.View.Activity.StoriesDetailActivity;
@@ -21,11 +22,12 @@ import java.util.List;
  * Created by AxtonSun on 2016/8/19.
  */
 public class RvHotAdapter extends RecyclerView.Adapter<RvHotAdapter.MyViewHolder> {
-    private List<HotStories> hotStories;
+    private List<Hot.RecentBean> hotStories;
     private Context context;
-    public RvHotAdapter(Context context){
+
+    public RvHotAdapter(Context context,List<Hot.RecentBean> hotStories) {
+        this.hotStories = hotStories;
         this.context = context;
-        hotStories = new ArrayList<>();
     }
 
     @Override
@@ -35,10 +37,12 @@ public class RvHotAdapter extends RecyclerView.Adapter<RvHotAdapter.MyViewHolder
     }
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        Utility.getImageLoader().displayImage(hotStories.get(position).getImages(),
-                holder.news_image,Utility.getDisplayImageOptions());
-        holder.news_title.setText(hotStories.get(position).getTitle());
 
+        Glide.with(context)
+                .load(hotStories.get(position).getThumbnail())
+                .placeholder(R.drawable.load)
+                .into(holder.news_image);
+        holder.news_title.setText(hotStories.get(position).getTitle());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,9 +69,4 @@ public class RvHotAdapter extends RecyclerView.Adapter<RvHotAdapter.MyViewHolder
         }
     }
 
-    public void refreshHotNewsList(List<HotStories> stories){
-        hotStories.clear();
-        Log.v("stroies", String.valueOf(stories.size()));
-        hotStories.addAll(stories);
-    }
 }

@@ -1,32 +1,37 @@
 package com.example.axtonsun.zhihudaily.Bean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by AxtonSun on 2016/8/19.
+ * Created by AxtonSun on 2016/11/29.
  */
-public class NewsDetail {
+
+public class DetailStories {
+
+    /**
+     * body : 前端代码
+     * image_source : Angel Abril Ruiz / CC BY
+     * title : 卖衣服的新手段：把耐用品变成「不停买新的」
+     * image : http://p4.zhimg.com/30/59/30594279d368534c6c2f91b2c00c7806.jpg
+     * share_url : http://daily.zhihu.com/story/3892357
+     * js : []
+     * ga_prefix : 050615
+     * images : ["http://p3.zhimg.com/69/d0/69d0ab1bde1988bd475bc7e0a25b713e.jpg"]
+     * type : 0
+     * id : 3892357
+     * css : ["http://news-at.zhihu.com/css/news_qa.auto.css?v=4b3e3"]
+     */
+
     private String body;
-
     private String image_source;
-
     private String title;
-    //大图
     private String image;
-
     private String share_url;
-
     private String ga_prefix;
-
     private int type;
-
     private int id;
-
-    private List<?> js;
-    //缩略图
+    private List<String> js;
     private List<String> images;
-
     private List<String> css;
 
     public String getBody() {
@@ -93,11 +98,11 @@ public class NewsDetail {
         this.id = id;
     }
 
-    public List<?> getJs() {
+    public List<String> getJs() {
         return js;
     }
 
-    public void setJs(List<?> js) {
+    public void setJs(List<String> js) {
         this.js = js;
     }
 

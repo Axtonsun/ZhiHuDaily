@@ -4,28 +4,24 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by AxtonSun on 2016/8/19.
+ * Created by AxtonSun on 2016/12/1.
  */
+
 public class Stories implements Serializable{
-
-    public String title;
-
-    private String ga_prefix;
-
-    private String images;
-
     private int type;
-
     private int id;
+    private String ga_prefix;
+    private String title;
+    private List<String> images;
 
-    public Stories() {
+    private String image;
+
+    public String getImage() {
+        return image;
     }
 
-
-    public Stories(int id, String title, String image) {
-        this.id = id;
-        this.title = title;
-        this.images = image;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public int getType() {
@@ -60,11 +56,13 @@ public class Stories implements Serializable{
         this.title = title;
     }
 
-    public String getImages() {
+    public List<String> getImages() {
         return images;
     }
 
-    public void setImages(String images) {
+    public void setImages(List<String> images) {
         this.images = images;
     }
+
+
 }

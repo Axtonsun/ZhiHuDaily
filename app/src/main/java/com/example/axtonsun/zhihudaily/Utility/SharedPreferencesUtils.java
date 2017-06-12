@@ -1,21 +1,23 @@
-package com.example.axtonsun.zhihudaily.Helper;
+package com.example.axtonsun.zhihudaily.Utility;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.example.axtonsun.zhihudaily.Bean.DayNight;
 
 /**
- * Created by AxtonSun on 2016/8/31.
+ * Created by Axton on 2017/6/11.
  */
-public class DayNightHelper {
 
-    private final static String FILE_NAME = "settings";
+public class SharedPreferencesUtils {
+    public static final String FILE_NAME = "sharePreferences_data";
+
     private final static String MODE = "day_night_mode";
 
     private SharedPreferences mSharedPreferences;
 
-    public DayNightHelper(Context context) {
+    public SharedPreferencesUtils(Context context) {
         this.mSharedPreferences = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
     }
 
@@ -37,7 +39,7 @@ public class DayNightHelper {
      * @return
      */
     public boolean isNight() {
-        String mode = mSharedPreferences.getString(MODE, DayNight.DAY.getName());
+        String mode = mSharedPreferences.getString(MODE, DayNight.NIGHT.getName());
         if (DayNight.NIGHT.getName().equals(mode)) {
             return true;
         } else {

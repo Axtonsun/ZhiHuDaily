@@ -51,7 +51,7 @@ public class StartActivity extends AppCompatActivity {
                 public void run() {
                     gotoMainActivity();
                 }
-            },1500);
+            },0);
 
         }
     }

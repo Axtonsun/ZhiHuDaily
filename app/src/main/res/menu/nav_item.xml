@@ -1,35 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group>
-        <item android:id="@+id/navigation_item1"
-            android:checkable="true"
-            android:title="首页"
-            android:icon="@mipmap/icon_local"/>
-        <item android:id="@+id/navigation_item2"
-            android:checkable="true"
-            android:title="收藏夹"
-            android:icon="@mipmap/icon_event"/>
-        <item android:id="@+id/navigation_item3"
-            android:checkable="true"
-            android:title="夜间模式"
-            android:icon="@mipmap/icon_photots"/>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_news"
+            android:icon="@mipmap/icon_local"
+            android:title="@string/home"/>
+        <item
+            android:id="@+id/nav_photo"
+            android:icon="@mipmap/icon_event"
+            android:title="@string/favourite"/>
+        <item
+            android:id="@+id/nav_down"
+            android:icon="@drawable/down"
+            android:title="@string/down"/>
     </group>
-    <item android:id="@+id/navigation_sub"
-        android:title="新增功能">
+
+    <item android:title=" ">
         <menu>
-            <item android:id="@+id/navigation_sub_item1"
-                android:checkable="true"
-                android:title="待完善"
-                android:icon="@mipmap/icon_douban"/>
-            <item android:id="@+id/navigation_sub_item2"
-                android:checkable="true"
-                android:title="待完善"
-                android:icon="@mipmap/icon_hot"/>
-            <item android:id="@+id/navigation_sub_item3"
-                android:checkable="true"
-                android:title="关于作者"
-                android:icon="@mipmap/icon_communities"/>
+            <item
+                android:id="@+id/nav_night_mode"
+                android:title="@string/night_mode"
+                android:icon="@drawable/dark" />
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@mipmap/icon_people"
+                android:title="@string/about"/>
+
         </menu>
     </item>
-
 </menu>

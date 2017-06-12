@@ -11,40 +11,40 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.webkit.WebView;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.example.axtonsun.zhihudaily.Bean.HotStories;
+import com.example.axtonsun.zhihudaily.Bean.Hot;
 import com.example.axtonsun.zhihudaily.Bean.Stories;
 import com.example.axtonsun.zhihudaily.DB.DailyZhDB;
-import com.example.axtonsun.zhihudaily.Helper.DayNightHelper;
 import com.example.axtonsun.zhihudaily.R;
-import com.example.axtonsun.zhihudaily.Task.LoadNewsDetailTask;
 import com.example.axtonsun.zhihudaily.Utility.Utility;
+
 
 /**
  * Created by AxtonSun on 2016/8/21.
  */
 public class StoriesDetailActivity extends AppCompatActivity{
 
-    protected WebView mWebView;
-    protected boolean isFavourite = false;
-    protected Stories stories;
-    protected HotStories hotStories;
-    private DayNightHelper helper;
+    public Toolbar toolbar;
+    public ImageView imageView;
+    public TextView detailBarTitle;
+    public TextView detailBarCopyright;
+    public WebView mWebView;
+
+    public boolean isFavourite = false;
+    public Stories stories;
+    public Hot.RecentBean hotStories;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        helper = new DayNightHelper(this);
-        if (helper.isDay()){
-            setTheme(R.style.DayTheme);
-        }else {
-            setTheme(R.style.NightTheme);
-        }
         setContentView(R.layout.item_news);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.tb1);
-        toolbar.setTitle("享受阅读的乐趣");
-        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        mWebView = (WebView) findViewById(R.id.webview);
+        imageView = (ImageView) findViewById(R.id.detail_bar_image);
+        detailBarTitle = (TextView) findViewById(R.id.detail_bar_title);
+        detailBarCopyright = (TextView) findViewById(R.id.detail_bar_copyright);
+        toolbar = (Toolbar) findViewById(R.id.tb1);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.arrow_back);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -53,48 +53,17 @@ public class StoriesDetailActivity extends AppCompatActivity{
                 finish();
             }
         });
-        mWebView = (WebView) findViewById(R.id.webview);
         setWebView(mWebView);
         init();
-        /*stories = (Stories) getIntent().getSerializableExtra("stories");
-        new LoadNewsDetailTask(mWebView).execute(stories.getId());//构造方法中WebView  第一个参数Integer型
-        isFavourite = DailyZhDB.getInstance(StoriesDetailActivity.this).isFavourite(stories);*/
-
-       /* pager = (ViewPager) findViewById(R.id.viewpager);
-        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                if (position == 0) {
-                    stories = (Stories) getIntent().getSerializableExtra("stories");
-                    new LoadNewsDetailTask(mWebView).execute(stories.getId());
-                    isFavourite = DailyZhDB.getInstance(StoriesDetailActivity.this).isFavourite(stories);
-
-                }else if (position == 1){
-                    hotStories= (HotStories) getIntent().getSerializableExtra("hotstories");
-                    new LoadNewsDetailTask(mWebView).execute(hotStories.getId());
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });*/
     }
 
-    protected void init(){
+    public void init(){
 
     }
 
     private void setWebView(WebView mWebView) {
         mWebView.getSettings().setJavaScriptEnabled(true);//开启Javascript支持
         mWebView.setVerticalScrollBarEnabled(true);//设置竖直滚动条
-        //mWebView.setHorizontalScrollBarEnabled(false);
     }
 
     public static void startActivity(Context context, Stories stories) {
@@ -106,7 +75,7 @@ public class StoriesDetailActivity extends AppCompatActivity{
             Utility.noNetworkAlert(context);
         }
     }
-    public static void startHotActivity(Context context, HotStories hotStories) {
+    public static void startHotActivity(Context context, Hot.RecentBean hotStories) {
         if (Utility.checkNetworkConnection(context)) {
             Intent i = new Intent(context, StoryHotActivity.class);
             i.putExtra("hotStories", hotStories);
@@ -131,11 +100,11 @@ public class StoriesDetailActivity extends AppCompatActivity{
                 break;
             case R.id.action_favourite:
                 if (!isFavourite) {
-                    DailyZhDB.getInstance(this).saveFavourite(stories);
+                    DailyZhDB.getInstance(this).saveFavourite(hotStories);
                     item.setIcon(R.drawable.fav_active);
                     isFavourite = true;
                 } else {
-                    DailyZhDB.getInstance(this).deleteFavourite(stories);
+                    DailyZhDB.getInstance(this).deleteFavourite(hotStories);
                     item.setIcon(R.drawable.fav_normal);
                     isFavourite = false;
                 }

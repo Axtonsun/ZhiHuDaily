@@ -6,9 +6,7 @@ import android.net.NetworkInfo;
 import android.widget.Toast;
 
 import com.example.axtonsun.zhihudaily.R;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -20,29 +18,29 @@ import java.util.Date;
  */
 public class Utility {
 
-    public static ImageLoader getImageLoader() {
-        return ImageLoader.getInstance();
-    }
-
-    public static DisplayImageOptions getDisplayImageOptions() {
-        return new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.headimage) //设置图片在下载期间显示的图片
-                .showImageForEmptyUri(R.drawable.headimage)//设置图片Uri为空或是错误的时候显示的图片
-                .showImageOnFail(R.drawable.headimage)  //设置图片加载/解码过程中错误时候显示的图片
-                .displayer(new FadeInBitmapDisplayer(0))//是否图片加载好后渐入的动画时间
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .build();
-    }
-
     public static boolean checkNetworkConnection(Context context) {
         ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activityNetwork = cm.getActiveNetworkInfo();
         return activityNetwork != null && activityNetwork.isConnected();
     }
-
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivity = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity == null) {
+        } else {
+            NetworkInfo[] info = connectivity.getAllNetworkInfo();
+            if (info != null) {
+                for (int i = 0; i < info.length; i++) {
+                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
     public static void noNetworkAlert(Context context) {
-        Toast.makeText(context, "有连接WIFI吗？有使用4G吗？！", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "有网络存在吗??!", Toast.LENGTH_SHORT).show();
     }
     public static String getTime() {
         /**

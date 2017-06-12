@@ -1,9 +1,10 @@
 package com.example.axtonsun.zhihudaily.Bean;
 
 /**
- * Created by AxtonSun on 2016/8/31.
+ * Created by Axton on 2017/6/11.
  */
-public enum  DayNight {
+
+public enum DayNight {
     DAY("DAY", 0),
     NIGHT("NIGHT", 1);
 

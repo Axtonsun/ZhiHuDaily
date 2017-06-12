@@ -12,20 +12,14 @@ import java.util.List;
  */
 public class VpAdapter extends FragmentPagerAdapter {
 
-    private final List<Fragment> mFragments = new ArrayList<>();//添加的Fragment的集合
-    private final List<String> mFragmentsTitles = new ArrayList<>();//每个Fragment对应的title的集合
+    private final List<Fragment> mFragments;//添加的Fragment的集合
+    private final List<String> mFragmentsTitles;//每个Fragment对应的title的集合
 
-    public VpAdapter(FragmentManager fm) {
+
+    public VpAdapter(FragmentManager fm, List<Fragment> mFragments, List<String> mFragmentsTitles) {
         super(fm);
-    }
-
-    /**
-     * @param fragment 添加Fragment
-     * @param fragmentTitle Fragment的标题，即TabLayout中对应Tab的标题
-     */
-    public void addFragment(Fragment fragment, String fragmentTitle) {
-        mFragments.add(fragment);
-        mFragmentsTitles.add(fragmentTitle);
+        this.mFragments = mFragments;
+        this.mFragmentsTitles = mFragmentsTitles;
     }
 
     @Override

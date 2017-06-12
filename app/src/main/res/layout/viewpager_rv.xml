@@ -23,12 +23,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
         android:src="@drawable/top"
-        app:backgroundTint="#FFFFFF" />
-<!--    <ViewStub
-        android:id="@+id/stub_import"
-        android:inflatedId="@+id/panel_import"
-        android:layout="@layout/item_footer"
-        android:layout_width="match_parent"
-        android:layout_gravity="bottom"
-        android:layout_height="wrap_content" />-->
+        app:backgroundTint="@color/drawer_normal" />
+
 </FrameLayout>

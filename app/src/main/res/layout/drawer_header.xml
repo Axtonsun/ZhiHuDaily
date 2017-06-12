@@ -1,34 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="?attr/colorPrimaryDark"
+    android:background="@mipmap/profile_cover"
     android:paddingLeft="20dp"
     android:paddingBottom="15dp"
     android:layout_width="match_parent"
     android:layout_height="180dp">
-    <com.example.axtonsun.zhihudaily.Utility.CircleImageView
+
+    <ImageView
         android:id="@+id/photo"
-        android:src="@drawable/headimage"
-        android:layout_above="@+id/desc"
-        android:layout_marginBottom="20dp"
+        android:src="@mipmap/profile_picture"
         android:layout_width="80dp"
-        android:layout_height="80dp" />
-   <!-- <ImageView
-        android:id="@+id/photo"
-        android:src="@drawable/headimage"
+        android:layout_height="80dp"
+        android:layout_above="@+id/dd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp" />
+
+    <TextView
+        android:id="@+id/dd"
+        android:text="Axton"
+        android:textColor="@color/drawer_header_text"
+        android:textSize="15sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/desc"
-        android:layout_marginBottom="20dp"
-        android:layout_width="80dp"
-        android:layout_height="80dp" />-->
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp" />
     <TextView
         android:id="@+id/desc"
-        android:layout_alignParentBottom="true"
-        android:text="欢迎使用知乎日报"
-        android:textStyle="bold"
-        android:textColor="?attr/clockTextColor"
-        android:textSize="20sp"
-        android:layout_marginBottom="2dp"
+        android:text="All work and no play makes Jack a dull boy"
+        android:textColor="@color/drawer_header_text"
+        android:textSize="15sp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
