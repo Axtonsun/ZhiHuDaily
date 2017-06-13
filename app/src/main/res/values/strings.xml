@@ -9,4 +9,6 @@
     <string name="about">关于</string>
     <string name="down">离线缓存</string>
     <string name="tools">设置</string>
+    <string name="name">孙国璋 20152120009</string>
+    <string name="intro">Java实验上机大作业</string>
 </resources>

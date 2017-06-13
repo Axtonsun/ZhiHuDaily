@@ -89,32 +89,4 @@ public class StartActivity extends AppCompatActivity {
         start.startAnimation(scaleAnimation);
     }
 
-
-/*    public static int calculateInSampleSize(BitmapFactory.Options options,
-                                            int reqWidth, int reqHeight) {
-
-        final int width = options.outWidth;
-        final int height = options.outHeight;
-        int inSampleSize = 1;
-
-        if (height > reqHeight || width > reqWidth) {
-
-            final int heightRatio = Math.round((float) height
-                    / (float) reqHeight);
-            final int widthRatio = Math.round((float) width / (float) reqWidth);
-
-            inSampleSize = heightRatio < widthRatio ? widthRatio : heightRatio;
-        }
-        return inSampleSize;
-    }
-
-    private static int iiii(){
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(, options);
-        options.inSampleSize = calculateInSampleSize(options, 100, 100);
-        options.inJustDecodeBounds = false;
-        // Log.d("图片处理", "采样率==" + options.inSampleSize);
-        return BitmapFactory.decodeFile(pictureName, options);
-    }*/
 }

@@ -45,8 +45,9 @@ public class HotList extends BaseFragment{
         isConnected = Utility.checkNetworkConnection(mActivity);
         list = new ArrayList<>();
         adapter = new RvHotAdapter(mActivity,list);
-        if (isConnected) loadHotNews();
-        else Utility.noNetworkAlert(mActivity);
+    //    if (isConnected)
+            loadHotNews();
+    //    else Utility.noNetworkAlert(mActivity);
         mRecyclerView.setAdapter(adapter);
     }
 

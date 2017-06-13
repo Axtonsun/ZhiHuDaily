@@ -11,7 +11,7 @@ import com.example.axtonsun.zhihudaily.Utility.SharedPreferencesUtils;
  */
 
 public class AppContext extends Application {
-    private static Context context;
+    public static Context context;
     private SharedPreferencesUtils utils;
     @Override
     public void onCreate() {
@@ -23,8 +23,7 @@ public class AppContext extends Application {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
     }
-
-    public static Context getContextObject(){
-        return context;
+    public static Context getContext() {
+        return context ;
     }
 }

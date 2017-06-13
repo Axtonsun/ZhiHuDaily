@@ -1,5 +1,7 @@
 package com.example.axtonsun.zhihudaily.Net;
 
+import android.content.Context;
+
 import com.example.axtonsun.zhihudaily.AppContext;
 import com.example.axtonsun.zhihudaily.Bean.Before;
 import com.example.axtonsun.zhihudaily.Bean.DetailStories;
@@ -32,19 +34,22 @@ public class RetrofitManager {
     private OkHttpClient mBuilder;
     private Retrofit retrofit;
 
+    private File cacheFile;
+    private int cacheSize;
+    private Cache cache;
     public static RetrofitManager builder(){
         return new RetrofitManager();
     }
 
     private RetrofitManager() {
-      //  File cacheFile = new File(AppContext.getContextObject().getCacheDir(), "newsList");//设置缓存路径
-      //  int cacheSize = 10 * 1024 * 1024; // 10 MiB 设置缓存大小
-   //     Cache cache = new Cache(cacheFile, cacheSize);
+        cacheFile = new File(AppContext.getContext().getCacheDir(),"response");//设置缓存路径
+        cacheSize = 50 * 1024 * 1024; // 10 MiB 设置缓存大小
+        cache = new Cache(cacheFile, cacheSize);
 
         mBuilder = new OkHttpClient.Builder()
-//                .addInterceptor(netInterceptor)
-//                .addNetworkInterceptor(netInterceptor)
-//                .cache(cache)
+                .addInterceptor(netInterceptor)
+                .addNetworkInterceptor(netInterceptor)
+                .cache(cache)
                 .build();
 
         retrofit = new Retrofit.Builder()
@@ -62,13 +67,13 @@ public class RetrofitManager {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
-            if(!Utility.checkNetworkConnection(AppContext.getContextObject())){
+            if(!Utility.checkNetworkConnection(AppContext.getContext())){
                 request = request.newBuilder()
                         .cacheControl(CacheControl.FORCE_CACHE)
                         .build();
             }
             Response originalResponse = chain.proceed(request);
-            if(Utility.checkNetworkConnection(AppContext.getContextObject())){
+            if(Utility.checkNetworkConnection(AppContext.getContext())){
                 //有网的时候读接口上的@Headers里的配置
                 String cacheControl = request.cacheControl().toString();
                 return originalResponse.newBuilder()

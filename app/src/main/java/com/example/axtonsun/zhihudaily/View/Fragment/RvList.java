@@ -76,7 +76,9 @@ public class RvList extends BaseFragment {
                 isConnected = Utility.checkNetworkConnection(mActivity);
                 if (isConnected) {
                     loadLatestNews();
-                    mRecyclerView.setAdapter(adapter);
+//                    mRecyclerView.setAdapter(adapter);
+//                  adapter.notifyDataSetChanged();
+                   // notifyDataSetChanged方法是刷新Adapter中的数据，setAdapter是给控件设置适配器，让得到的数据在控件中显示出来，两个方法的作用是不一样的
                     Snackbar.make(mActivity.getWindow().getDecorView(),"已是最新消息",Snackbar.LENGTH_SHORT).show();
                     swipeRefreshWidget.setRefreshing(false);
                 }else {
@@ -85,13 +87,13 @@ public class RvList extends BaseFragment {
                 }
             }
         });
-        if (isConnected) {
+//        if (isConnected) {
             loadLatestNews();
-        }
-        else {
-            Utility.noNetworkAlert(mActivity);
-        }
-        mRecyclerView.setAdapter(adapter);
+//        }
+//        else {
+//            Utility.noNetworkAlert(mActivity);
+//        }
+//        mRecyclerView.setAdapter(adapter);
     }
 
     private void loadLatestNews(){
@@ -102,7 +104,8 @@ public class RvList extends BaseFragment {
                 .subscribe(new Subscriber<Latest>() {
                     @Override
                     public void onCompleted() {
-                        adapter.notifyDataSetChanged();
+//                        adapter.notifyDataSetChanged();
+                        mRecyclerView.setAdapter(adapter);
                     }
 
                     @Override

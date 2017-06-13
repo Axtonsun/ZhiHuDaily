@@ -8,19 +8,21 @@
     <!-- 网络连接           允许图片缓存到SD Card中            网络状况检查 -->
 
     <application
+        android:name=".AppContext"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".View.Activity.MainActivity"
+            android:name=".View.Activity.StartActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".View.Activity.MainActivity"/>
         <activity android:name=".View.Activity.StoriesDetailActivity"/>
 
         <activity android:name=".View.Activity.FavouriteActivity"/>

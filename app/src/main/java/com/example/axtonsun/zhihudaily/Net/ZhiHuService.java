@@ -9,6 +9,7 @@ import com.example.axtonsun.zhihudaily.Bean.Latest;
 import com.example.axtonsun.zhihudaily.Bean.Stories;
 
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Path;
 import rx.Observable;
 
@@ -32,6 +33,7 @@ public interface ZhiHuService {
     @GET("4/news/before/{date}")
     Observable<Before> getBefore(@Path("date") int date);
 
+    @Headers("Cache-Control: public, max-age=3600")
     @GET("4/news/{id}")
     Observable<DetailStories> getDetail(@Path("id") int id);
 

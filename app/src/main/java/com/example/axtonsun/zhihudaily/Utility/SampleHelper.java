@@ -39,10 +39,10 @@ public class SampleHelper{
                 .setCover(R.mipmap.profile_cover)
                 .setLinksAnimated(true)
                 .setDividerDashGap(13)
-                .setName("Axton")
-                .setSubTitle("axtonsun")
+                .setName("孙国璋")
+                .setSubTitle("2015212009")
                 .setLinksColumnsCount(4)
-                .setBrief("All work and no play makes Jack a dull boy")
+                .setBrief("Java实验上机大作业")
                 .addGitHubLink("axtonsun")
                 .addInstagramLink("axtonsun")
                 .addEmailLink("781024534@qq.com")
@@ -63,6 +63,5 @@ public class SampleHelper{
 
         flHolder.addView(view);
     }
-
 
 }
